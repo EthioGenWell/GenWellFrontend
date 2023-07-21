@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Input from "./components/ui/Input";
+import Button from "./components/ui/Button";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Input type="text" name="email" labelName="Email" />
         <Input type="password" name="password" labelName="Password" />
         <Input type="password" name="cpassword" labelName="Confirm Password" />
+        <Button className="btn-secondary" type="submit" text="Register" />
       </form>
     </div>
   );
