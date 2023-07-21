@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, FC } from 'react';
+import { InputHTMLAttributes, FC } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -21,17 +21,19 @@ const Input: FC<InputProps> = ({
 }) => {
   return (
     <div className="mb-3">
-      (labelName ?
-      <label htmlFor={id} className="form-label">
-        {labelName}
-      </label>
-      : "" )
+      {labelName ? (
+        <label htmlFor={id} className="form-label">
+          {labelName}
+        </label>
+      ) : (
+        ""
+      )}
       <input
         className={`form-control ${className}`}
         type={type}
         value={value}
         name={name}
-        placeholder={placeholder ? placeholder : ''}
+        placeholder={placeholder ? placeholder : ""}
         id={id}
         {...props}
       />
