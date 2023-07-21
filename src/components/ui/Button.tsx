@@ -19,6 +19,7 @@ const Button: FC<ButtonProps> = ({
       type={type}
       disabled={isLoading}
       onClick={onClick}
+      {...props}
     >
       {text}
     </button>
