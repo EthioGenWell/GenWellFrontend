@@ -1,14 +1,15 @@
 import React from "react";
 import "./App.css";
-import Input from "./components/ui/Input";
-import Button from "./components/ui/Button";
+import logo from "./logo.svg";
+import Input from "./components/ui/Form/Input";
+import Button from "./components/ui/Form/Button";
 import Logo from "./components/ui/Logo";
 
 function App() {
   return (
-    <div className="col center">
+    <div className="center">
       <form className="form p-5" action="">
-        <Logo src="../public/logo512.png" alt="Logo" />
+        <Logo src={logo} width="200px" alt="Logo" />
         <Input type="text" name="email" labelName="Email" />
         <Input type="password" name="password" labelName="Password" />
         <Input type="password" name="cpassword" labelName="Confirm Password" />
