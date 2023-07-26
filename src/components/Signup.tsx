@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { IUser } from "../types/User";
 import { signUp } from "../utils/signUp";
@@ -14,6 +15,7 @@ function Signup() {
   const [isError, setError] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
   const [message, setMessage] = useState("");
+  const redirect = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,17 +30,22 @@ function Signup() {
 
       try {
         const response: any = await signUp(user);
-        console.log(response);
-        if (!response.data.success) {
+        if (response.data.success) {
           setSubmitted(true);
+          setError(false);
           setMessage(response.data.message);
           formik.resetForm();
+          setTimeout(() => {
+            redirect("/login");
+          }, 1500);
         } else {
           setError(true);
+          setSubmitted(false);
           setMessage("Something went wrong");
         }
       } catch (error: any) {
         setError(true);
+        setSubmitted(false);
         setMessage(error.response.data.error);
       }
     },
@@ -64,7 +71,7 @@ function Signup() {
         {isSubmitted && (
           <div
             style={{
-              backgroundColor: "red",
+              backgroundColor: "green",
               padding: "5px",
               display: "flex",
               justifyContent: "center",
