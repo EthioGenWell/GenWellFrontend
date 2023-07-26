@@ -19,7 +19,7 @@ const Input: FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className="mb-3">
+    <div className="mt-3">
       {labelName ? (
         <label htmlFor={id} className="form-label">
           {labelName}
