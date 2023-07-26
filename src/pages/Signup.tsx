@@ -36,7 +36,7 @@ function Signup() {
         <Input type="text" name="email" labelName="Email" />
         <Input type="password" name="password" labelName="Password" />
         <Input type="password" name="cpassword" labelName="Confirm Password" />
-        <Button className="btn-secondary" type="submit" text="Register" />
+        <Button className="btn-secondary" type="submit" text="Signup" />
       </form>
     </div>
   );
