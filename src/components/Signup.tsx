@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { IUser } from "../types/User";
 import { signUp } from "../utils/signUp";
@@ -11,6 +11,8 @@ import Button from "../components/ui/Form/Button";
 import Logo from "../components/ui/Logo";
 
 function Signup() {
+  const [isError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,14 +20,25 @@ function Signup() {
       passwordConfirm: "",
     },
     validationSchema: RegisterSchema,
-    async onSubmit(values) {
+    onSubmit: async (values) => {
+      console.log("Submitting");
+
       const user: IUser = {
         ...values,
       };
-
-      const response = await signUp(user);
-      if (!response.data.success) {
-        formik.resetForm();
+      console.log(user);
+      try {
+        const response = await signUp(user);
+        if (!response.data.success) {
+          formik.resetForm();
+        } else {
+          setError(true);
+          setErrorMessage("Something went wrong");
+          console.log(response.data);
+        }
+      } catch (error: any) {
+        setError(true);
+        setErrorMessage(error.message);
       }
     },
   });
@@ -33,6 +46,20 @@ function Signup() {
     <div className="center">
       <form className="form p-5" action="" onSubmit={formik.handleSubmit}>
         <Logo src={logo} width="200px" alt="Logo" />
+        {isError && (
+          <div
+            style={{
+              backgroundColor: "red",
+              padding: "5px",
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "0.90rem",
+            }}
+            className="rounded-2"
+          >
+            {errorMessage}
+          </div>
+        )}
         <div>
           <Input
             type="text"
