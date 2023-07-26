@@ -4,8 +4,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Signup from "./pages/Signup";
-import ErrorPage from "./pages/ErrorPage";
+import Signup from "./components/Signup";
+import ErrorPage from "./components/ErrorPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
