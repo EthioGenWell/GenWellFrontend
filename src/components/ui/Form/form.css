@@ -1,0 +1,7 @@
+.error-color {
+  background-color: red;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: auto;
+}
