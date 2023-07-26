@@ -12,7 +12,8 @@ import Logo from "../components/ui/Logo";
 
 function Signup() {
   const [isError, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitted, setSubmitted] = useState(false);
+  const [message, setMessage] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -21,24 +22,24 @@ function Signup() {
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values) => {
-      console.log("Submitting");
-
       const user: IUser = {
         ...values,
       };
-      console.log(user);
+
       try {
-        const response = await signUp(user);
+        const response: any = await signUp(user);
+        console.log(response);
         if (!response.data.success) {
+          setSubmitted(true);
+          setMessage(response.data.message);
           formik.resetForm();
         } else {
           setError(true);
-          setErrorMessage("Something went wrong");
-          console.log(response.data);
+          setMessage("Something went wrong");
         }
       } catch (error: any) {
         setError(true);
-        setErrorMessage(error.message);
+        setMessage(error.response.data.error);
       }
     },
   });
@@ -57,7 +58,21 @@ function Signup() {
             }}
             className="rounded-2"
           >
-            {errorMessage}
+            {message}
+          </div>
+        )}
+        {isSubmitted && (
+          <div
+            style={{
+              backgroundColor: "red",
+              padding: "5px",
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "0.90rem",
+            }}
+            className="rounded-2"
+          >
+            {message}
           </div>
         )}
         <div>
