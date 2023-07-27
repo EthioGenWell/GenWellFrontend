@@ -28,24 +28,24 @@ function Login() {
       };
 
       try {
-        const response = await login(user); // Call your login API function here
+        const response = await login(user); 
         if (response.data.success) {
           setSubmitted(true);
           setError(false);
           setMessage(response.data.message);
           formik.resetForm();
           setTimeout(() => {
-            redirect("/"); // Redirect to the dashboard after successful login
+            redirect("/"); // Redirect to the home after successful login
           }, 1500);
         } else {
           setError(true);
           setSubmitted(false);
           setMessage("Invalid email or password");
         }
-      } catch (error) {
+      } catch (error: any) {
         setError(true);
         setSubmitted(false);
-        setMessage("Something went wrong: " + error);
+        setMessage(error.response.data.error);
       }
     },
   });
@@ -55,7 +55,18 @@ function Login() {
       <form className="form p-5" action="" onSubmit={formik.handleSubmit}>
         <Logo src={logo} width="200px" alt="Logo" />
         {isError && (
-          <div className="error-msg">{message}</div>
+          <div
+            style={{
+              backgroundColor: "red",
+              padding: "5px",
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "0.90rem",
+            }}
+            className="rounded-2"
+          >
+            {message}
+          </div>
         )}
         {isSubmitted && (
           <div className="success-msg">{message}</div>
