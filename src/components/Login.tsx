@@ -10,6 +10,7 @@ import logo from "../logo.svg";
 import Input from "../components/ui/Form/Input";
 import Button from "../components/ui/Form/Button";
 import Logo from "../components/ui/Logo";
+import LoginWithGoogle from './LoginWithGoogle';
 
 function Login() {
   const [isError, setError] = useState(false);
@@ -98,6 +99,8 @@ function Login() {
           )}
         </div>
         <Button className="btn-secondary mt-3" type="submit" text="Login" />
+        or
+        <LoginWithGoogle />
       </form>
     </div>
   );
