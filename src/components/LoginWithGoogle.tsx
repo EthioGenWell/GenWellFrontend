@@ -1,5 +1,5 @@
 import {GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline} from "react-google-login";
-
+import { redirect } from "react-router-dom";
 const clientId = process.env.GOOGLE_CLIENT_ID ?? ""
 
 
@@ -8,6 +8,8 @@ const LoginWithGoogle = () => {
         try {
           // Send the response.idToken to your backend for verification
           const idToken = response?.tokenId; // tokenId is specific to react-google-login
+          console.log(idToken);
+          
       
           if (!idToken) {
             throw new Error("No idToken received");
@@ -41,16 +43,17 @@ const LoginWithGoogle = () => {
       
 
     const onSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-        console.log("Login success with user: ", (res as GoogleLoginResponse).profileObj);
+      responseGoogle(res as GoogleLoginResponse)
+      // return redirect("/home")
     }
 
     const onFailure = (res: GoogleLoginResponse) => {
-        console.log("Login faild with res: ", res);
-        
+      alert("Login with google faild");
+      return redirect("/login")
     }
   
     return (
-      <div className="mt-3" >
+      <div className="mt-3">
         <GoogleLogin
           clientId={clientId}
           buttonText="Login with Google"

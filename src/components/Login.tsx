@@ -11,13 +11,9 @@ import Input from "../components/ui/Form/Input";
 import Button from "../components/ui/Form/Button";
 import Logo from "../components/ui/Logo";
 import LoginWithGoogle from './LoginWithGoogle';
-import {gapi} from "gapi-script";
 
-// const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID ?? "No client id"
 
 function Login() {
-  console.log(process.env);
-  
 
   const [isError, setError] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
