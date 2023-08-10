@@ -3,8 +3,11 @@ import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from "react-google-login";
+
+import dev from "../../config/default";
+
 import { redirect } from "react-router-dom";
-const clientId = process.env.GOOGLE_CLIENT_ID ?? "";
+const clientId = dev.google.clientId;
 
 const LoginWithGoogle = () => {
   const responseGoogle = async (response: GoogleLoginResponse) => {
@@ -52,6 +55,10 @@ const LoginWithGoogle = () => {
     alert("Login with google faild");
     return redirect("/login");
   };
+
+  if (!clientId) {
+    throw Error("No client Id found");
+  }
 
   return (
     <div className="mt-3">
