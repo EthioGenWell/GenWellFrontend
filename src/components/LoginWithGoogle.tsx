@@ -50,13 +50,13 @@ const LoginWithGoogle = () => {
     }
   
     return (
-      <div>
+      <div className="mt-3" >
         <GoogleLogin
           clientId={clientId}
           buttonText="Login with Google"
           onSuccess={onSuccess}
           onFailure={onFailure}
-          cookiePolicy={"single_host_origin"}
+          cookiePolicy={"/"}
         />
       </div>
     );

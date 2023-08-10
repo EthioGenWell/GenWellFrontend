@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { IUser } from "../types/User";
@@ -11,8 +11,14 @@ import Input from "../components/ui/Form/Input";
 import Button from "../components/ui/Form/Button";
 import Logo from "../components/ui/Logo";
 import LoginWithGoogle from './LoginWithGoogle';
+import {gapi} from "gapi-script";
+
+// const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID ?? "No client id"
 
 function Login() {
+  console.log(process.env);
+  
+
   const [isError, setError] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
   const [message, setMessage] = useState("");
@@ -99,7 +105,6 @@ function Login() {
           )}
         </div>
         <Button className="btn-secondary mt-3" type="submit" text="Login" />
-        or
         <LoginWithGoogle />
       </form>
     </div>
