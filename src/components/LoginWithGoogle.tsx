@@ -3,25 +3,33 @@ import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from "react-google-login";
+import { gapi } from "gapi-script";
 
-import dev from "../../config/default";
+import config from "../config/default";
 
 import { redirect } from "react-router-dom";
-const clientId = dev.google.clientId;
+const clientId = config.google.clientId;
+
+if (!clientId) {
+  throw new Error("No client Id");
+}
 
 const LoginWithGoogle = () => {
+  gapi.load("auth2", () => {
+    gapi.auth2.init({
+      client_id: clientId,
+    });
+  });
   const responseGoogle = async (response: GoogleLoginResponse) => {
     try {
       // Send the response.idToken to your backend for verification
       const idToken = response?.tokenId; // tokenId is specific to react-google-login
-      console.log(idToken);
 
       if (!idToken) {
         throw new Error("No idToken received");
       }
 
-      // Send the idToken to your backend for verification
-      const backendResponse = await fetch("/oauth/login", {
+      const backendResponse = await fetch("http://localhost:8001/oauth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,11 +56,10 @@ const LoginWithGoogle = () => {
 
   const onSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
     responseGoogle(res as GoogleLoginResponse);
-    // return redirect("/home")
+    return redirect("/home");
   };
 
   const onFailure = (res: GoogleLoginResponse) => {
-    alert("Login with google faild");
     return redirect("/login");
   };
 
@@ -67,7 +74,7 @@ const LoginWithGoogle = () => {
         buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
-        cookiePolicy={"/"}
+        cookiePolicy="single_host_origin"
       />
     </div>
   );

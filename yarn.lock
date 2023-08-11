@@ -6723,6 +6723,7 @@ __metadata:
     dotenv: ^16.3.1
     eslint-plugin-prettier: ^5.0.0
     formik: ^2.4.2
+    gapi-script: ^1.2.0
     react: ^18.2.0
     react-dom: ^18.2.0
     react-google-login: ^5.2.2
@@ -6831,6 +6832,13 @@ __metadata:
   version: 1.2.3
   resolution: "functions-have-names@npm:1.2.3"
   checksum: c3f1f5ba20f4e962efb71344ce0a40722163e85bee2101ce25f88214e78182d2d2476aa85ef37950c579eb6cf6ee811c17b3101bb84004bb75655f3e33f3fdb5
+  languageName: node
+  linkType: hard
+
+"gapi-script@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "gapi-script@npm:1.2.0"
+  checksum: f61140855e9a4369de15badb2f4568fdd037d949561de5fd86eca379b89423301bc6062748aba6bd1be68a5329f6239ca9c4b6b5fe454ad6046b6b918979d1ba
   languageName: node
   linkType: hard
 
