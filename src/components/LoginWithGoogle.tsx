@@ -29,13 +29,18 @@ const LoginWithGoogle = () => {
         throw new Error("No idToken received");
       }
 
-      const backendResponse = await fetch("http://localhost:8001/oauth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token: idToken }),
-      });
+      const backendResponse = await fetch(
+        "http://localhost:8001/v1/oauth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token: idToken }),
+        }
+      );
+
+      console.log(backendResponse);
 
       if (!backendResponse.ok) {
         throw new Error("Authentication failed");
